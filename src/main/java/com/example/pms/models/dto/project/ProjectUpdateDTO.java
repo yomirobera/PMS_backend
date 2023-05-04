@@ -7,13 +7,11 @@ import java.util.Date;
 import java.util.Set;
 
 @Data
-public class ProjectDTO {
-    private int id;
+public class ProjectUpdateDTO {
     private String title;
     private String type;
     private String description;
     private Date startDate;
     private Date dueDate;
     private String phase;
-    private Set<User> users;
 }

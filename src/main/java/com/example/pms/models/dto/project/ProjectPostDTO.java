@@ -7,8 +7,7 @@ import java.util.Date;
 import java.util.Set;
 
 @Data
-public class ProjectDTO {
-    private int id;
+public class ProjectPostDTO {
     private String title;
     private String type;
     private String description;

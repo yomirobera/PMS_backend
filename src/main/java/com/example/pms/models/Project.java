@@ -23,16 +23,15 @@ public class Project {
     @Column(length = 50, nullable = false)
     private String type;
     @Column(length = 50)
-
     private String description;
 
     @DateTimeFormat(pattern="dd/MM/yyyy")
-    private Date StartDate;
+    private Date startDate;
     @DateTimeFormat(pattern="dd/MM/yyyy")
-    private Date DueDate;
+    private Date dueDate;
 
-    private String Phase;
+    private String phase;
 
     @ManyToMany(mappedBy = "projects")
-    private Set<User> user;
+    private Set<User> users;
 }

@@ -18,14 +18,11 @@ public class User {
     @Column(length = 50,nullable = false)
     private String firstname;
     @Column(length = 50,nullable = false)
-
     private String lastname;
     @Column(length = 50,nullable = false)
-
     private String email;
-    @Column(length = 50)
-
-    private String todolist;
+    @ElementCollection
+    private Set<String> todolist;
 
     @ManyToMany
     @JoinTable(name = "user_projects",

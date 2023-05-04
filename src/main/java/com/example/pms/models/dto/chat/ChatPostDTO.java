@@ -6,8 +6,7 @@ import lombok.Data;
 import java.util.Set;
 
 @Data
-public class ChatDTO {
-    private int id;
+public class ChatPostDTO {
     private String timeStamp;
     private Set<User> users;
 }

@@ -16,8 +16,8 @@ public class Chat {
     private Integer id;
 
     @Column(length = 50,nullable = false)
-    private String Senttime;
+    private String timeStamp;
 
     @ManyToMany(mappedBy = "chats")
-    private Set<User> user;
+    private Set<User> users;
 }
