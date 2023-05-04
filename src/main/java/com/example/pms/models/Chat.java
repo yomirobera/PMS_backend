@@ -15,8 +15,9 @@ public class Chat {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(length = 50,nullable = false)
     private String Senttime;
 
-    @OneToMany(mappedBy = "chat")
+    @ManyToMany(mappedBy = "chats")
     private Set<User> user;
 }

@@ -11,6 +11,7 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
+@Table(name = "project")
 public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,6 +22,7 @@ public class Project {
 
     @Column(length = 50, nullable = false)
     private String type;
+    @Column(length = 50)
 
     private String description;
 
@@ -31,7 +33,6 @@ public class Project {
 
     private String Phase;
 
-    //Many to Many
-    @ManyToMany(mappedBy = "Project")
+    @ManyToMany(mappedBy = "projects")
     private Set<User> user;
 }
