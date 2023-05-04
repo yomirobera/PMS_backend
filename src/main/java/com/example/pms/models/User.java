@@ -13,12 +13,12 @@ import java.util.Set;
 public class User {
     @Id
     @Column(unique = true, nullable = false, updatable = false)
-    private Integer id;
+    private String id;
 
     @Column(length = 50,nullable = false)
-    private String firstname;
+    private String firstName;
     @Column(length = 50,nullable = false)
-    private String lastname;
+    private String lastName;
     @Column(length = 50,nullable = false)
     private String email;
     @ElementCollection

@@ -24,8 +24,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public Project update(Project entity) {
-        return null;
+    public void update(Project entity) {
     }
 
     @Override
@@ -33,8 +32,4 @@ public class ProjectServiceImpl implements ProjectService {
 
     }
 
-    @Override
-    public boolean exists(Integer integer) {
-        return false;
-    }
 }

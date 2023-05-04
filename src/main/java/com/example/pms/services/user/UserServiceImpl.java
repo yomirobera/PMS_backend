@@ -1,18 +1,27 @@
 package com.example.pms.services.user;
 
 import com.example.pms.models.User;
+import com.example.pms.repositories.UserRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 
+@Service
 public class UserServiceImpl implements UserService{
+    private final UserRepository userRepository;
+
+    public UserServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
     @Override
-    public User findById(Integer integer) {
+    public User findById(String s) {
         return null;
     }
 
     @Override
     public Collection<User> findAll() {
-        return null;
+        return userRepository.findAll();
     }
 
     @Override
@@ -21,17 +30,14 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public User update(User entity) {
-        return null;
+    public void update(User entity) {
     }
 
     @Override
-    public void deleteById(Integer integer) {
+    public void deleteById(String s) {
 
     }
 
-    @Override
-    public boolean exists(Integer integer) {
-        return false;
-    }
+
+
 }

@@ -31,17 +31,11 @@ public class ChatServiceImpl implements ChatService {
     }
 
     @Override
-    public Chat update(Chat entity) {
-        return null;
-    }
+    public void update(Chat entity) {}
 
     @Override
     public void deleteById(Integer integer) {
 
     }
 
-    @Override
-    public boolean exists(Integer integer) {
-        return false;
-    }
 }
