@@ -3,6 +3,7 @@ package com.example.pms.services.user;
 import com.example.pms.models.User;
 import com.example.pms.repositories.UserRepository;
 import org.springframework.stereotype.Service;
+import com.example.pms.utils.exceptions.*;
 
 import java.util.Collection;
 
@@ -15,8 +16,8 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public User findById(String s) {
-        return null;
+    public User findById(String id) {
+        return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
     }
 
     @Override
@@ -26,15 +27,17 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User add(User entity) {
-        return null;
+        return userRepository.save(entity);
     }
 
     @Override
     public void update(User entity) {
+        userRepository.save(entity);
     }
 
     @Override
-    public void deleteById(String s) {
+    public void deleteById(String id) {
+        userRepository.deleteById(id);
 
     }
 
