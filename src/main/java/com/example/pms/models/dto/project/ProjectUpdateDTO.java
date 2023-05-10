@@ -8,6 +8,7 @@ import java.util.Set;
 
 @Data
 public class ProjectUpdateDTO {
+    private int id;
     private String title;
     private String type;
     private String description;
