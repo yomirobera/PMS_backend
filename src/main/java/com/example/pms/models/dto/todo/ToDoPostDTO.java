@@ -9,6 +9,8 @@ public class ToDoPostDTO {
     private String title;
 
     private String category;
+    private String priorityLvl;
+
 
     private Date date;
 }
