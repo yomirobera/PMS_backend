@@ -14,6 +14,6 @@ public class UserDTO {
     private String email;
     private Set<String> toDoList;
     private Set<Integer> projects;
-    private Set<Chat> chats;
+    private Set<Integer> chats;
 
 }

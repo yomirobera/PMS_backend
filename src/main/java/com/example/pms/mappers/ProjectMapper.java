@@ -1,5 +1,6 @@
 package com.example.pms.mappers;
 
+import com.example.pms.models.Chat;
 import com.example.pms.models.Project;
 import com.example.pms.models.User;
 import com.example.pms.models.dto.project.ProjectDTO;
@@ -16,7 +17,7 @@ import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring")
 public abstract class ProjectMapper {
-    @Mapping(target = "users", source = "users", qualifiedByName = "projectToIds")
+    @Mapping(target = "users", source = "users", qualifiedByName = "usersToIds")
     public abstract ProjectDTO projectToProjectDTO(Project project);
     public abstract Collection<ProjectDTO> projectToProjectDTO(Collection<Project> users);
 
@@ -24,10 +25,11 @@ public abstract class ProjectMapper {
 
     public abstract Project projectPostDtoToProject(ProjectPostDTO projectDto);
 
-    @Named("projectToIds")
+    @Named("usersToIds")
     Set<String> map(Set<User> source) {
         if (source == null) return null;
         return source.stream().map(p -> p.getId()
         ).collect(Collectors.toSet());
     }
+
 }
