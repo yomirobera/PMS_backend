@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 
+@CrossOrigin("*")
+@RestController
+@RequestMapping(path = "api/v1/chat")
 public class ChatController {
 
     private final ChatService chatService;
