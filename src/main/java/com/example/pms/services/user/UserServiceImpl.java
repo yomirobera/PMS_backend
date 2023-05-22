@@ -1,5 +1,6 @@
 package com.example.pms.services.user;
 
+import com.example.pms.models.Project;
 import com.example.pms.models.ToDo;
 import com.example.pms.models.User;
 import com.example.pms.repositories.UserRepository;
@@ -50,5 +51,10 @@ public class UserServiceImpl implements UserService{
     public Set<ToDo> findToDoList(String id) {
         User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
         return user.getToDoList();
+    }
+    @Override
+    public Set<Project> findAllProjects(String id) {
+        User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
+        return user.getProjects();
     }
 }
