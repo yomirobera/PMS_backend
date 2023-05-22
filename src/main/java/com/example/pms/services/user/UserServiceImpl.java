@@ -1,5 +1,6 @@
 package com.example.pms.services.user;
 
+import com.example.pms.models.ToDo;
 import com.example.pms.models.User;
 import com.example.pms.repositories.UserRepository;
 import org.springframework.stereotype.Service;
@@ -8,6 +9,7 @@ import java.util.HashMap;
 import java.util.ArrayList;
 
 import java.util.Collection;
+import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -44,5 +46,9 @@ public class UserServiceImpl implements UserService{
     }
 
 
-
+    @Override
+    public Set<ToDo> findToDoList(String id) {
+        User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
+        return user.getToDoList();
+    }
 }

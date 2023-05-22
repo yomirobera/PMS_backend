@@ -21,8 +21,8 @@ public class User {
     private String lastName;
     @Column(length = 50,nullable = false)
     private String email;
-    @ElementCollection
-    private Set<String> todolist;
+    @OneToMany(mappedBy = "user")
+    private Set<ToDo> toDoList;
 
     @ManyToMany
     @JoinTable(name = "user_projects",
