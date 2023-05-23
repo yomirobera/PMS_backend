@@ -50,6 +50,10 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public void deleteById(Integer id) {
+        Project project = projectRepository.findById(id).orElseThrow(() -> new ProjectNotFoundException(id));
+        for (User u : project.getUsers()) {
+            u.getProjects().remove(project);
+        }
         projectRepository.deleteById(id);
     }
 

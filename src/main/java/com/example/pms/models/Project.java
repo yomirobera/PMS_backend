@@ -22,7 +22,7 @@ public class Project {
 
     @Column(length = 50, nullable = false)
     private String type;
-    @Column(length = 50)
+    @Column(length = 250)
     private String description;
 
     @DateTimeFormat(pattern="dd/MM/yyyy")

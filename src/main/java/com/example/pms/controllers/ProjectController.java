@@ -85,9 +85,9 @@ public class ProjectController {
                             schema = @Schema(implementation = ApiErrorResponse.class)) })
     })
     @PutMapping("{id}")
-    public ResponseEntity update(@RequestBody ProjectUpdateDTO projectDTO, @PathVariable String id) {
+    public ResponseEntity update(@RequestBody ProjectUpdateDTO projectDTO, @PathVariable int id) {
         // Validates if body is correct
-        if (!id.equals(projectDTO.getId()))
+        if (id != projectDTO.getId())
             return ResponseEntity.badRequest().build();
 
         projectService.update(projectMapper.projectUpdateDtoToProject(projectDTO));
@@ -111,7 +111,7 @@ public class ProjectController {
     @PostMapping
     public ResponseEntity add(@RequestBody ProjectPostDTO projectDto) {
         Project project = projectService.add(projectMapper.projectPostDtoToProject(projectDto));
-        URI location = URI.create("projects/" + project.getId());
+        URI location = URI.create("project/" + project.getId());
         return ResponseEntity.created(location).build();
     }
     @Operation(summary = "Deletes an existing project by id")
