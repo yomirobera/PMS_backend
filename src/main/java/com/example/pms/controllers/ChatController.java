@@ -22,8 +22,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 
-@Controller
 @CrossOrigin("*")
+@Controller
 @RestController
 @RequestMapping(path = "api/v1/chat")
 public class ChatController {
