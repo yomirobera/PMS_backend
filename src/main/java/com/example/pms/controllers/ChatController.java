@@ -2,9 +2,9 @@ package com.example.pms.controllers;
 
 import com.example.pms.mappers.ChatMapper;
 import com.example.pms.models.Chat;
+import com.example.pms.models.ChatMessage;
 import com.example.pms.models.dto.chat.ChatUpdateDTO;
 import com.example.pms.models.dto.chat.ChatPostDTO;
-import com.example.pms.models.dto.chat.ChatUpdateDTO;
 import com.example.pms.services.chat.ChatService;
 import com.example.pms.utils.error.ApiErrorResponse;
 import io.swagger.v3.oas.annotations.Operation;
@@ -13,10 +13,16 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.Payload;
+import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 
+@Controller
 @CrossOrigin("*")
 @RestController
 @RequestMapping(path = "api/v1/chat")
@@ -28,6 +34,18 @@ public class ChatController {
     public ChatController(ChatService chatService, ChatMapper chatMapper) {
         this.chatService = chatService;
         this.chatMapper = chatMapper;
+    }
+    @MessageMapping("/chat.sendMessage")
+    @SendTo("/topic/public")
+    public ChatMessage sendMessage(@Payload ChatMessage chatMessage) {
+        return chatMessage;
+    }
+
+    @MessageMapping("/chat.addUser")
+    @SendTo("/topic/public")
+    public ChatMessage addUser(@Payload ChatMessage chatMessage, SimpMessageHeaderAccessor headerAccessor) {
+        headerAccessor.getSessionAttributes().put("username", chatMessage.getSender());
+        return chatMessage;
     }
 
     @Operation(summary = "Get all chats")
