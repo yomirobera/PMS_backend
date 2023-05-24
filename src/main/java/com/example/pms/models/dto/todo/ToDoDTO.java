@@ -12,7 +12,7 @@ public class ToDoDTO {
 
     private String category;
     private String priorityLvl;
-
+    private String user;
 
     private Date date;
 }

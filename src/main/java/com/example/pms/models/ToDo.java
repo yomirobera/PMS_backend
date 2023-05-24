@@ -25,10 +25,13 @@ public class ToDo {
     @Column(length = 50, nullable = false)
     private String priorityLvl;
 
-
     @DateTimeFormat(pattern="dd/MM/yyyy")
     private Date date;
 
     @ManyToMany(mappedBy = "projects")
     private Set<User> users;
+
+    @ManyToOne
+    @JoinColumn
+    private User user;
 }

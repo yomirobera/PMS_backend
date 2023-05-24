@@ -14,5 +14,5 @@ public class ProjectPostDTO {
     private Date startDate;
     private Date dueDate;
     private String phase;
-    private Set<User> users;
+    private Set<String> users;
 }

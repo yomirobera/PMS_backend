@@ -1,5 +1,7 @@
 package com.example.pms.controllers;
 
+import com.example.pms.mappers.ProjectMapper;
+import com.example.pms.mappers.ToDoMapper;
 import com.example.pms.mappers.UserMapper;
 import com.example.pms.models.User;
 import com.example.pms.models.dto.user.UserPostDTO;
@@ -23,9 +25,13 @@ public class UserController {
 
     private final UserService userService;
     private final UserMapper userMapper;
-    public UserController(UserService userService, UserMapper userMapper) {
+    private final ToDoMapper toDoMapper;
+    private final ProjectMapper projectMapper;
+    public UserController(UserService userService, UserMapper userMapper, ToDoMapper toDoMapper, ProjectMapper projectMapper) {
         this.userService = userService;
         this.userMapper = userMapper;
+        this.toDoMapper = toDoMapper;
+        this.projectMapper = projectMapper;
     }
 
     @Operation(summary = "Get all users")
@@ -130,5 +136,43 @@ public class UserController {
     public ResponseEntity delete(@PathVariable String id) {
         userService.deleteById(id);
         return ResponseEntity.noContent().build();
+    }
+    @Operation(summary = "Get a users toDoList")
+    @ApiResponses( value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Success",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = User.class)) }),
+            @ApiResponse(responseCode = "400",
+                    description = "Malformed request",
+                    content ={ @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ApiErrorResponse.class)) }),
+            @ApiResponse(responseCode = "404",
+                    description = "Users not found",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ApiErrorResponse.class)) })
+    })
+    @GetMapping("{id}/getToDoList")
+    public ResponseEntity getToDoList(@PathVariable String id) {
+        return ResponseEntity.ok(toDoMapper.todoToToDoDto(userService.findToDoList(id)));
+    }
+    @Operation(summary = "Get a users projects")
+    @ApiResponses( value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Success",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = User.class)) }),
+            @ApiResponse(responseCode = "400",
+                    description = "Malformed request",
+                    content ={ @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ApiErrorResponse.class)) }),
+            @ApiResponse(responseCode = "404",
+                    description = "Users not found",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ApiErrorResponse.class)) })
+    })
+    @GetMapping("{id}/getAllProjects")
+    public ResponseEntity getAllProjects(@PathVariable String id) {
+        return ResponseEntity.ok(projectMapper.projectToProjectDTO(userService.findAllProjects(id)));
     }
 }

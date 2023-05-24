@@ -12,7 +12,7 @@ public class UserDTO {
     private String firstName;
     private String lastName;
     private String email;
-    private Set<String> toDoList;
+    private Set<Integer> toDoList;
     private Set<Integer> projects;
     private Set<Integer> chats;
 
