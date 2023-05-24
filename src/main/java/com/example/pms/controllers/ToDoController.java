@@ -82,9 +82,9 @@ public class ToDoController {
                             schema = @Schema(implementation = ApiErrorResponse.class)) })
     })
     @PutMapping("{id}")
-    public ResponseEntity update(@RequestBody ToDoUpdateDTO todoDTO, @PathVariable String id) {
+    public ResponseEntity update(@RequestBody ToDoUpdateDTO todoDTO, @PathVariable int id) {
         // Validates if body is correct
-        if (!id.equals(todoDTO.getId()))
+        if (id != todoDTO.getId())
             return ResponseEntity.badRequest().build();
 
         todoService.update(todoMapper.todoUpdateDtoToToDo(todoDTO));

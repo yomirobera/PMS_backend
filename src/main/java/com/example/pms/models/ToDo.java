@@ -28,10 +28,7 @@ public class ToDo {
     @DateTimeFormat(pattern="dd/MM/yyyy")
     private Date date;
 
-    @ManyToMany(mappedBy = "projects")
-    private Set<User> users;
-
     @ManyToOne
-    @JoinColumn
+    @JoinColumn(nullable = false)
     private User user;
 }

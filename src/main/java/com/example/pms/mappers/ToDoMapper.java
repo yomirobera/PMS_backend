@@ -20,13 +20,16 @@ public abstract class ToDoMapper {
     @Mapping(target = "user", source = "user", qualifiedByName = "userToId")
     public abstract ToDoDTO todoToToDoDto(ToDo todo);
     public abstract Collection<ToDoDTO> todoToToDoDto(Collection<ToDo> todos);
-
+    @Mapping(target = "user", source = "user", qualifiedByName = "idToUser")
     public abstract ToDo todoUpdateDtoToToDo(ToDoUpdateDTO todoDTO);
     @Mapping(target = "user", source = "user", qualifiedByName = "idToUser")
     public abstract ToDo todoPostDtoToToDo(ToDoPostDTO todoDto);
     @Named("userToId")
     String map(User source) {
-        if (source == null) return null;
+        if (source == null) {
+            System.out.println("SOURCE NULL");
+            return null;
+        };
         return source.getId();
     }
     @Named("idToUser")
