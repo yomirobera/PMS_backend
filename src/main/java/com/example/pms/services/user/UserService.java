@@ -10,4 +10,5 @@ import java.util.Set;
 public interface UserService extends CrudService <User, String> {
     Set<ToDo> findToDoList(String id);
     Set<Project> findAllProjects(String id);
+
 }
