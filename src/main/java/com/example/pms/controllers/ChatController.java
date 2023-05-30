@@ -3,8 +3,8 @@ package com.example.pms.controllers;
 import com.example.pms.mappers.ChatMapper;
 import com.example.pms.models.Chat;
 import com.example.pms.models.ChatMessage;
-import com.example.pms.models.dto.chat.ChatUpdateDTO;
 import com.example.pms.models.dto.chat.ChatPostDTO;
+import com.example.pms.models.dto.chat.ChatUpdateDTO;
 import com.example.pms.services.chat.ChatService;
 import com.example.pms.utils.error.ApiErrorResponse;
 import io.swagger.v3.oas.annotations.Operation;
@@ -18,6 +18,7 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.messaging.simp.annotation.SendToUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -29,13 +30,14 @@ import java.net.URI;
 @RestController
 @RequestMapping(path = "api/v1/chat")
 public class ChatController {
-
+    private final SimpMessagingTemplate messagingTemplate;
     private final ChatService chatService;
     private final ChatMapper chatMapper;
 
-    public ChatController(ChatService chatService, ChatMapper chatMapper) {
+    public ChatController(ChatService chatService, ChatMapper chatMapper,SimpMessagingTemplate messagingTemplate) {
         this.chatService = chatService;
         this.chatMapper = chatMapper;
+        this.messagingTemplate = messagingTemplate;
     }
 /*
     @MessageMapping("/chat.sendMessage")
@@ -45,10 +47,20 @@ public class ChatController {
     }
 */
     @MessageMapping("/chat.sendMessage/{userId}")
-    @SendToUser("/queue/reply")
-    public ChatMessage sendMessageToUser(@DestinationVariable String userId, @Payload ChatMessage chatMessage) {
-        return chatMessage;
+    @SendToUser("/topic/reply")
+    public void sendMessageToUser(@DestinationVariable String userId, @Payload ChatMessage chatMessage) {
+        // Send the message to the specific user
+        messagingTemplate.convertAndSendToUser(userId, "/queue/reply", chatMessage);
     }
+    /*public ChatMessage sendMessageToUser(@DestinationVariable String userId, @Payload ChatMessage chatMessage) {
+        return chatMessage;
+    }*/
+
+   /* @MessageMapping("/chat.subscribeMessage/{userId}")
+    @SendToUser("/queue/reply")
+    public ChatMessage subscribeToMessage(@DestinationVariable String userId, @Payload ChatMessage chatMessage) {
+        return chatMessage;
+    }*/
 
     @MessageMapping("/chat.addUser")
     @SendTo("/topic/public")

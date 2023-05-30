@@ -3,7 +3,6 @@ package com.example.pms.mappers;
 import com.example.pms.models.Chat;
 import com.example.pms.models.User;
 import com.example.pms.models.dto.chat.ChatDTO;
-
 import com.example.pms.models.dto.chat.ChatPostDTO;
 import com.example.pms.models.dto.chat.ChatUpdateDTO;
 import org.mapstruct.Mapper;
