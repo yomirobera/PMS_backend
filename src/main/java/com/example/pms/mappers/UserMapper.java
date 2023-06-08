@@ -16,7 +16,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring")
-public abstract class UserMapper {
+public abstract class   UserMapper {
     @Mapping(target = "projects", source = "projects", qualifiedByName = "projectToIds")
     @Mapping(target = "chats", source = "chats", qualifiedByName = "chatToIds")
     @Mapping(target = "toDoList", source = "toDoList", qualifiedByName = "toDoListToIds")

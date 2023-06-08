@@ -23,8 +23,8 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public Project findById(Integer id) {
-        return projectRepository.findById(id).orElseThrow(() -> new ProjectNotFoundException(id));
-    }
+            return projectRepository.findById(id).orElseThrow(() -> new ProjectNotFoundException(id));
+        }
 
     @Override
     public Collection<Project> findAll() {
